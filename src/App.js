@@ -18,15 +18,6 @@ class App extends Component {
   constructor (props) {
     super(props);
   }
-
-  componentDidMount () {
-    const script = document.createElement("script");
-
-    script.src = "./diff_match_patch.js";
-    script.async = true;
-
-    document.body.appendChild(script);
-}
   
   render() {
     return (
