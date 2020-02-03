@@ -92,7 +92,7 @@ class App extends Component {
     const comparisonOutput = this.state.comparisonOutput;
       if (comparisonOutput) {
     
-        button = <button onClick={ e => this.downloadTxtFile() }>Download txt</button>
+        button = <button class="btn btn-primary" onClick={ e => this.downloadTxtFile() }>Download txt</button>
       
       }
     return (
