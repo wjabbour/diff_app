@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-var diff = require('diff');
 
 let reader;
-let comparedText;
 
 class App extends Component {
   constructor (props) {
@@ -52,12 +50,20 @@ class App extends Component {
   }
   
   compareFiles = () => {
+    let configuration = {
+      "GS": [3]
+    }
     let comparison = "";
     let fileA = this.state.firstFile;
     let fileB = this.state.secondFile;
     for(let i = 0; i < fileA.lines.length; i++) {
       for(let j = 1; j < fileA.lines[i].length; j++) {
-
+        // if segment name is in conf
+        if (configuration.hasOwnProperty(fileA.lines[i][0])) {
+          if (configuration[fileA.lines[i][0]].includes(j)) {
+            continue;
+          }
+        }
         if(!(fileA.lines[i][j] === fileB.lines[i][j])) {
           comparison += `${fileA.name} Line ${i + 1}, Section ${fileA.lines[i][0]}-${j}: ${fileA.lines[i][j]}\r\n${fileB.name} Line ${i + 1}, Section ${fileB.lines[i][0]}-${j}: ${fileB.lines[i][j]}\r\n`
         }
