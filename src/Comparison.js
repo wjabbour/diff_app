@@ -9,6 +9,7 @@ export default class Comparison extends Component {
         this.handleFileA = this.handleFileA.bind(this);
         this.handleFileB = this.handleFileB.bind(this);
     }
+
     handleFileA = file => {
         let fileContents = "";
         reader = new FileReader();
@@ -82,6 +83,7 @@ export default class Comparison extends Component {
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
     }
+   
     render() {
         let button;
         const comparisonOutput = this.state.comparisonOutput;
@@ -90,34 +92,46 @@ export default class Comparison extends Component {
         }
         return (
             <div>
-                <div>
-                    <div className="add-media" >
-                        <input
-                        name="First File"
-                        type="file"
-                        id="fileA"
-                        accept=".txt"
-                        ref="fileUploader"
-                        onChange={ e => this.handleFileA(e.target.files[0])}
-                        />
-                    </div>
-                </div>
-
-                <div>
-                    <div className="add-media" >
-                        <input
-                        name="First File"
-                        type="file"
-                        id="fileB"
-                        accept=".txt"
-                        ref="fileUploader"
-                        onChange={ e => this.handleFileB(e.target.files[0])}
-                        />
-                    </div>
-                </div>
-            
-                <button onClick={ e => this.compareFiles() }>Compare</button>
-                {button}
+                <h5>
+                    <b>
+                        Please select files to compare and a specific
+                        configuration for ignore information
+                    </b>
+                </h5>
+                <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">File 1</th>
+                    <th scope="col">File 2</th>
+                    <th scope="col">Configuration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input
+                            type="file"
+                            id="fileA"
+                            accept=".txt"
+                            ref="fileUploader"
+                            onChange={ e => this.handleFileA(e.target.files[0])}
+                            ref={this.inputRef}
+                            />
+                        </td>
+                        <td>
+                            <input
+                            name="First File"
+                            type="file"
+                            id="fileB"
+                            accept=".txt"
+                            ref="fileUploader"
+                            onChange={ e => this.handleFileB(e.target.files[0])}
+                            />
+                            <button>File</button>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
             </div>
         )
     }
