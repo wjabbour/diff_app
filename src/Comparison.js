@@ -48,7 +48,7 @@ export default class Comparison extends Component {
         reader.readAsText(file);
     }
       
-        compareFiles = () => {
+    compareFiles = () => {
         let configuration = {
             "GS": [3]
         }
