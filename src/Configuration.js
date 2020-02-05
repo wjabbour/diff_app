@@ -7,7 +7,7 @@ export default class Configuration extends Component {
         this.counter = 0;
         this.state = {
             configurationName: "",
-            fileType: "X12",
+            fileType: "",
             ruleInputs: [],
             ruleValues: []
         };
@@ -40,12 +40,11 @@ export default class Configuration extends Component {
         const ruleValues = this.state.ruleValues;
         ruleValues.forEach(rule => {
             tempObj.segmentName = rule.segmentName;
-            tempObj.segmentNumber = rule.segmentNumber;
+            tempObj.segmentNumber = parseInt(rule.segmentNumber);
             ruleset.configurationRules.push(tempObj);
         });
-        console.log(ruleset);
         localStorage.setItem("configurationRules", JSON.stringify(ruleset));
-        this.setState({ ruleInputs: [], ruleValues: [], configurationName: "" })
+        this.setState({ ruleInputs: [], ruleValues: [], configurationName: "", fileType: "" })
     }
     onChangeRuleInput(segmentName, segmentNumber, id) {
         const rules = this.state.ruleValues;
@@ -89,6 +88,16 @@ export default class Configuration extends Component {
         }, () => { this.counter++; })
     }
     render() {
+        let fileTypes = [ { fileType: "X12" }, { fileType: "Delimeter" } ]; 
+        const options = fileTypes.map((config) =>
+            <option key={config.fileType} value={ config.fileType }>
+                { config.fileType }
+            </option>
+        );
+        let fileTypeSelect =    <select className="form-control" onChange={ this.onChangeFileType } >
+                            <option hidden defaultValue={{label: "", value: {}}}></option>
+                            { options }
+                        </select>       
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -100,10 +109,7 @@ export default class Configuration extends Component {
                                 onChange={this.onChangeConfigurationName}
                         />
                         <label>File Type</label>
-                        <select className="form-control" value={this.state.fileType} onChange={this.onChangeFileType}>
-                            <option value="X12">X12</option>
-                            <option value="Delimeter">Delimeter</option>
-                        </select>
+                        { fileTypeSelect }
                         <input type="submit" value="Save" className="btn btn-primary" />
 
                         <div className="container">
