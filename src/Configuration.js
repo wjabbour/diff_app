@@ -83,10 +83,28 @@ export default class Configuration extends Component {
     onChangeFileType(e) {
         this.setState({ fileType: e.target.value });
     }
+    /*
+        Accesses state to construct a ruleset object. 
+        TODO: Need to make this hit an api instead and possibly
+        do some merging with the existing objects if there are any 
+    */
     onSubmit(e) {
         e.preventDefault();
-
-       console.log(this.state.ruleValues);
+        const ruleset = {
+            fileType: this.state.fileType,
+            configurationName: this.state.configurationName,
+            configurationRules: []
+        }
+        let tempObj = {};
+        const ruleValues = this.state.ruleValues;
+        ruleValues.forEach(rule => {
+            tempObj.segmentName = rule.segmentName;
+            tempObj.segmentNumber = rule.segmentNumber;
+            ruleset.configurationRules.push(tempObj);
+        });
+        console.log(ruleset);
+        localStorage.setItem("configurationRules", JSON.stringify(ruleset));
+        this.setState({ ruleInputs: [], ruleValues: [], configurationName: "" })
     }
 
     onChangeRuleInput(segmentName, segmentNumber, id) {
