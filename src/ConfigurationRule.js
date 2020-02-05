@@ -3,50 +3,55 @@ import React, { Component } from 'react';
 export default class ConfigurationRule extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-        };
-        this.onChangeConfigurationName = this.onChangeConfigurationName.bind(this);
-        this.onChangeFileType = this.onChangeFileType.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+            segmentName: "",
+            ignoreField: ""
+        }
+        this.onChangeRuleInput = this.onChangeRuleInput.bind(this);
+        this.onChangeSegmentName = this.onChangeSegmentName.bind(this);
+        this.onChangeIgnoreField = this.onChangeIgnoreField.bind(this);
+        this.onRemoveRuleInput = this.onRemoveRuleInput.bind(this);
     }
 
-    onChangeConfigurationName(e) {
-        this.setState({ configurationName: e.target.value });
+    onChangeSegmentName(e) {
+        this.setState({
+            segmentName: e.target.value
+        }, () => this.onChangeRuleInput());
     }
-    onChangeFileType(e) {
-        this.setState({ fileType: e.target.value });
+    onChangeIgnoreField(e) {
+        this.setState({
+            ignoreField: e.target.value
+        }, () => this.onChangeRuleInput());
     }
-    onSubmit(e) {
-        e.preventDefault();
-
-        console.log(`${this.state.configurationName}   ${this.state.fileType}`)
+    onChangeRuleInput() {
+        this.props.onChangeRuleInput(this.state.segmentName, this.state.ignoreField, this.props.listid);
     }
-
-
-
-
+    onRemoveRuleInput(e) {
+        this.props.onRemoveRuleInput(e, this.props.listid);
+    }
     render() {
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Configuration Name</label>
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.configurationName}
-                                onChange={this.onChangeConfigurationName}
+                                onChange={this.onChangeSegmentName}
                         />
-                        <label>File Type</label>
-                        <select className="form-control" value={this.state.fileType} onChange={this.onChangeFileType}>
-                            <option value="X12">X12</option>
-                            <option value="Delimeter">Delimeter</option>
-                        </select>
-                        <input type="submit" value="Save" className="btn btn-primary" />
                     </div>
-                </form>
-                
+                    <div className="col-sm">
+                    <input  type="text"
+                                className="form-control"
+                                onChange={this.onChangeIgnoreField}
+                    />
+                    </div>
+                    <div className="col-sm">
+                        <button onClick={this.onRemoveRuleInput}>
+                            -
+                        </button>
+                    </div>
+                </div>
             </div>
-        )
+        );
     }
 }

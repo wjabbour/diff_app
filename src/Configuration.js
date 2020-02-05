@@ -1,64 +1,6 @@
 import React, { Component } from 'react';
 import ConfigurationRule from './ConfigurationRule';
 
-
-class Input extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            segmentName: "",
-            ignoreField: ""
-        }
-
-        this.onChangeRuleInput = this.onChangeRuleInput.bind(this);
-        this.onChangeSegmentName = this.onChangeSegmentName.bind(this);
-        this.onChangeIgnoreField = this.onChangeIgnoreField.bind(this);
-        this.onRemoveRuleInput = this.onRemoveRuleInput.bind(this);
-    }
-
-    onChangeSegmentName(e) {
-        this.setState({
-            segmentName: e.target.value
-        }, () => this.onChangeRuleInput());
-    }
-    onChangeIgnoreField(e) {
-        this.setState({
-            ignoreField: e.target.value
-        }, () => this.onChangeRuleInput());
-    }
-    onChangeRuleInput() {
-        this.props.onChangeRuleInput(this.state.segmentName, this.state.ignoreField, this.props.listid);
-    }
-    onRemoveRuleInput(e) {
-        this.props.onRemoveRuleInput(e, this.props.listid);
-    }
-    render() {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm">
-                        <input  type="text"
-                                className="form-control"
-                                onChange={this.onChangeSegmentName}
-                        />
-                    </div>
-                    <div className="col-sm">
-                    <input  type="text"
-                                className="form-control"
-                                onChange={this.onChangeIgnoreField}
-                    />
-                    </div>
-                    <div className="col-sm">
-                        <button onClick={this.onRemoveRuleInput}>
-                            -
-                        </button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
 export default class Configuration extends Component {
     constructor(props) {
         super(props);
@@ -138,7 +80,7 @@ export default class Configuration extends Component {
         const inputList = this.state.ruleInputs;
         this.setState({
             ruleInputs: inputList.concat(
-                <Input  listid={this.counter.toString()}
+                <ConfigurationRule  listid={this.counter.toString()}
                         onChangeRuleInput={this.onChangeRuleInput}
                         onRemoveRuleInput={this.onRemoveRuleInput} 
                         key={this.counter.toString()} 
