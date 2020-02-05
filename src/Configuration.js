@@ -76,7 +76,6 @@ export default class Configuration extends Component {
         this.onRemoveRuleInput = this.onRemoveRuleInput.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
     onChangeConfigurationName(e) {
         this.setState({ configurationName: e.target.value });
     }
@@ -106,7 +105,6 @@ export default class Configuration extends Component {
         localStorage.setItem("configurationRules", JSON.stringify(ruleset));
         this.setState({ ruleInputs: [], ruleValues: [], configurationName: "" })
     }
-
     onChangeRuleInput(segmentName, segmentNumber, id) {
         const rules = this.state.ruleValues;
         let found = false;
@@ -149,11 +147,7 @@ export default class Configuration extends Component {
         }, () => {
             this.counter++;
         })
-
     }
-    
-
-
     render() {
         return (
             <div>
@@ -187,14 +181,7 @@ export default class Configuration extends Component {
                             </div>
                         </div>
                     </div>
-
-
-                    
-
-                    
-                    
                 </form>
-                
             </div>
         )
     }
