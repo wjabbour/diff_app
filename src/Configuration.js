@@ -1,15 +1,79 @@
 import React, { Component } from 'react';
+import ConfigurationRule from './ConfigurationRule';
+
+
+class Input extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            segmentName: "",
+            ignoreField: ""
+        }
+
+        this.onChangeRuleInput = this.onChangeRuleInput.bind(this);
+        this.onChangeSegmentName = this.onChangeSegmentName.bind(this);
+        this.onChangeIgnoreField = this.onChangeIgnoreField.bind(this);
+        this.onRemoveRuleInput = this.onRemoveRuleInput.bind(this);
+    }
+
+    onChangeSegmentName(e) {
+        this.setState({
+            segmentName: e.target.value
+        }, () => this.onChangeRuleInput());
+    }
+    onChangeIgnoreField(e) {
+        this.setState({
+            ignoreField: e.target.value
+        }, () => this.onChangeRuleInput());
+    }
+    onChangeRuleInput() {
+        this.props.onChangeRuleInput(this.state.segmentName, this.state.ignoreField, this.props.listid);
+    }
+    onRemoveRuleInput(e) {
+        this.props.onRemoveRuleInput(e, this.props.listid);
+    }
+    render() {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
+                        <input  type="text"
+                                className="form-control"
+                                onChange={this.onChangeSegmentName}
+                        />
+                    </div>
+                    <div className="col-sm">
+                    <input  type="text"
+                                className="form-control"
+                                onChange={this.onChangeIgnoreField}
+                    />
+                    </div>
+                    <div className="col-sm">
+                        <button onClick={this.onRemoveRuleInput}>
+                            -
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
 
 export default class Configuration extends Component {
     constructor(props) {
         super(props);
-
+        this.counter = 0;
         this.state = {
             configurationName: "",
-            fileType: "X12"
+            fileType: "X12",
+            ruleInputs: [],
+            ruleValues: []
         };
         this.onChangeConfigurationName = this.onChangeConfigurationName.bind(this);
         this.onChangeFileType = this.onChangeFileType.bind(this);
+        this.onAddRuleInput = this.onAddRuleInput.bind(this);
+        this.onChangeRuleInput = this.onChangeRuleInput.bind(this);
+        this.onRemoveRuleInput = this.onRemoveRuleInput.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -22,10 +86,54 @@ export default class Configuration extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        console.log(`${this.state.configurationName}   ${this.state.fileType}`)
+       console.log(this.state.ruleValues);
     }
 
+    onChangeRuleInput(segmentName, segmentNumber, id) {
+        const rules = this.state.ruleValues;
+        let found = false;
+        rules.forEach(rule => {
+            if (rule.id === id) {
+                rule.segmentName = segmentName;
+                rule.segmentNumber = segmentNumber;
+                found = true;
+            }
+        });
+        if (!found) {
+            rules.push({
+                segmentName: segmentName,
+                segmentNumber: segmentNumber,
+                id: id
+            });
+        }
+        this.setState({ruleValues: rules});
+    }
+    onRemoveRuleInput(e, id) {
+        e.preventDefault();
+        
+        const ruleValues = this.state.ruleValues;
+        const ruleInputs = this.state.ruleInputs;
+        const newRules = ruleValues.filter(rule => rule.id !== id);
+        const newRuleInputs = ruleInputs.filter(input => input.key !== id);
+        this.setState({ruleValues: newRules, ruleInputs: newRuleInputs});
+    }
+    onAddRuleInput(e) {
+        e.preventDefault();
+        const inputList = this.state.ruleInputs;
+        this.setState({
+            ruleInputs: inputList.concat(
+                <Input  listid={this.counter.toString()}
+                        onChangeRuleInput={this.onChangeRuleInput}
+                        onRemoveRuleInput={this.onRemoveRuleInput} 
+                        key={this.counter.toString()} 
+                />
+            )
+        }, () => {
+            this.counter++;
+        })
 
+    }
+    
 
 
     render() {
@@ -45,7 +153,28 @@ export default class Configuration extends Component {
                             <option value="Delimeter">Delimeter</option>
                         </select>
                         <input type="submit" value="Save" className="btn btn-primary" />
+
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg">
+                                {
+                                    this.state.ruleInputs.map(function(input, index) {
+                                        return input; 
+                                    })
+                                }
+                                </div>
+                                <div className="col-sm">
+                                    <button onClick={this.onAddRuleInput}>+</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
+                    
+
+                    
+                    
                 </form>
                 
             </div>
