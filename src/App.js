@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Configuration from "./Configuration";
-import Comparison from './Comparison';
+import ComparisonTable from './ComparisonTable';
 
 class App extends Component {
   render() {
@@ -23,7 +23,7 @@ class App extends Component {
             </div>
           </nav>
           <br/>
-          <Route path="/" exact component={Comparison} />
+          <Route path="/" exact component={ComparisonTable} />
           <Route path="/configuration" component={Configuration} />
         </div>
       </Router>

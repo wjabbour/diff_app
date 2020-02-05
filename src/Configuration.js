@@ -81,14 +81,12 @@ export default class Configuration extends Component {
         this.setState({
             ruleInputs: inputList.concat(
                 <ConfigurationRule  listid={this.counter.toString()}
-                        onChangeRuleInput={this.onChangeRuleInput}
-                        onRemoveRuleInput={this.onRemoveRuleInput} 
-                        key={this.counter.toString()} 
+                                    onChangeRuleInput={this.onChangeRuleInput}
+                                    onRemoveRuleInput={this.onRemoveRuleInput} 
+                                    key={this.counter.toString()} 
                 />
             )
-        }, () => {
-            this.counter++;
-        })
+        }, () => { this.counter++; })
     }
     render() {
         return (
