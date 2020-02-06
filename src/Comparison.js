@@ -19,6 +19,7 @@ export default class Comparison extends Component {
     componentDidUpdate() {
         if (this.props.doCompare) {
             let myResult = this.props.compareFiles(this.state.firstFile, this.state.secondFile, this.parseConfig(this.state.configuration));
+            console.log(myResult);
         }
     }
 
