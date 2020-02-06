@@ -125,7 +125,7 @@ export default class Comparison extends Component {
             }
             
         } else {
-             outcome = <div></div>//
+             outcome = <div></div>
         }
         return(
             <tr> 
