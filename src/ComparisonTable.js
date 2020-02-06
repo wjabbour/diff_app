@@ -91,6 +91,7 @@ export default class ComparisonTable extends Component {
                             <th scope="col">File 1</th>
                             <th scope="col">File 2</th>
                             <th scope="col">Configuration</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>

@@ -138,6 +138,14 @@ export default class Comparison extends Component {
                 <td>
                     { configurationSelect }
                 </td>
+                <td>
+                    <div className="d-flex align-items-center">
+                        <i className="material-icons mr-1">done</i>
+                        <button className="btn btn-secondary mr-1">View</button>
+                        <button className="btn btn-secondary">Save Report</button>
+                    </div>
+                    
+                </td>
             </tr> 
         );
     }
