@@ -85,14 +85,18 @@ export default class ComparisonTable extends Component {
                     </tbody>
                 </table>
                 <div className="container">
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-sm"></div>
                         <div className="col-sm"></div>
                         <div className="col-sm">
-                            <button onClick={this.doCompare}>
-                                Compare
-                            </button>
+                            
                         </div>
+                    </div> */}
+                    <div style={{marginTop: "50px"}} className="d-flex flex-row-reverse">
+                        <button onClick={this.doCompare}>
+                                Compare
+                        </button>
+                    
                     </div>
                 </div>
             </div>
