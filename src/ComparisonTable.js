@@ -40,7 +40,12 @@ export default class ComparisonTable extends Component {
         })
     }
     addComparison() {
-
+        const newComparison = <Comparison   doCompare={ this.state.doCompare }
+                                            configurations={ this.state.configurations }
+                                            compareFiles={ this.compareFiles }/>
+        this.setState({
+            comparisons: this.state.comparisons.push(newComparison)
+        })
     }
     doCompare() {
         this.setState({
