@@ -8,7 +8,8 @@ export default class Comparison extends Component {
         this.state = {
             firstFile: {},
             secondFile: {},
-            configuration: {}
+            configuration: {},
+            result: ""
         }
         this.handleFileA = this.handleFileA.bind(this);
         this.handleFileB = this.handleFileB.bind(this);
@@ -22,7 +23,9 @@ export default class Comparison extends Component {
     }
     runComparison() {
         let myResult = this.props.compareFiles(this.state.firstFile, this.state.secondFile, this.parseConfig(this.state.configuration));
-        console.log(myResult);
+        this.setState({
+            result: myResult
+        })
     }
     parseConfig() {
         const configuration = this.state.configuration;
