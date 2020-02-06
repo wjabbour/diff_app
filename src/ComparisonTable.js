@@ -27,6 +27,18 @@ export default class ComparisonTable extends Component {
     }
     componentDidMount() {
         this.getConfigurations();
+        let configurations = [];
+        if (localStorage.getItem("configurationRules")) {
+            configurations.push(JSON.parse(localStorage.getItem("configurationRules")));
+        }
+        console.log(this.state.configurations);
+        this.initialComparison = 
+         <Comparison onRef={ref => (this.myRefs.push(ref))} 
+                            doCompare={ this.state.doCompare }
+                            configurations={ configurations }
+                            compareFiles={ this.compareFiles }
+                            key={ this.comparisonCounter.toString() } /> 
+        this.comparisonCounter++;
     }
 
     // TODO: this only works if there is one config rule
@@ -95,11 +107,7 @@ export default class ComparisonTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    <Comparison onRef={ref => (this.myRefs.push(ref))} 
-                            doCompare={ this.state.doCompare }
-                            configurations={ this.state.configurations }
-                            compareFiles={ this.compareFiles }
-                            key={ this.comparisonCounter.toString() } />
+                        { this.initialComparison }
                     {
                         this.state.comparisons.map(function(comparison, index) {
                             return comparison; 
