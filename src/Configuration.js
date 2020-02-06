@@ -100,7 +100,7 @@ export default class Configuration extends Component {
                                 </select>       
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form>
                     <div className="form-group">
                         <label>Configuration Name</label>
                         <input  type="text"
@@ -109,7 +109,7 @@ export default class Configuration extends Component {
                         />
                         <label>File Type</label>
                         { fileTypeSelect }
-                        <input type="submit" value="Save" className="btn btn-primary" />
+                        
 
                         <div className="container">
                             <div className="row">
@@ -127,6 +127,10 @@ export default class Configuration extends Component {
                         </div>
                     </div>
                 </form>
+                <div style={{marginTop: "50px"}} className="d-flex flex-row-reverse">
+                    <input type="submit" onClick={ this.onSubmit } value="Save" className="btn btn-primary" />
+                </div>
+                
             </div>
         )
     }
