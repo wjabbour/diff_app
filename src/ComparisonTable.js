@@ -25,6 +25,7 @@ export default class ComparisonTable extends Component {
         this.addComparison = this.addComparison.bind(this);
         this.doCompare = this.doCompare.bind(this);
         this.removeComparison = this.removeComparison.bind(this);
+        this.generateReport = this.generateReport.bind(this);
     }
     // TODO: Refactor to make manual call unecessary?
     componentDidMount() {
@@ -104,11 +105,29 @@ export default class ComparisonTable extends Component {
         }
         return comparison;
     }
+    generateReport(e) {
+        e.preventDefault();
+        let reportResult = "";
+        const children = this.myRefs;
+        children.forEach(child => {
+            if (child.state.result.length > 0) {
+                reportResult += child.state.result;
+                reportResult += "\r\n\r\n\r\n";
+            }
+        })
+
+        const element = document.createElement("a");
+        const file = new Blob([reportResult], {type: 'text/html'});
+        element.href = URL.createObjectURL(file);
+        element.download = "comparison_diff.txt";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
+    }
     render() {
         let generateReportButton = <div></div>;
 
         if (this.state.doCompare) {
-            generateReportButton =  <button>
+            generateReportButton =  <button onClick={ this.generateReport }>
                                         Generate Report
                                     </button>
         }
