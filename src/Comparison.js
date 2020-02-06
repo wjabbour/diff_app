@@ -108,7 +108,7 @@ export default class Comparison extends Component {
     }
 
     render() {
-        let button;
+        //let button;
         let configurationSelect = this.createConfigurationSelect();
         // const comparisonOutput = this.state.comparisonOutput;
         // if (comparisonOutput) {
@@ -123,7 +123,6 @@ export default class Comparison extends Component {
                 accept=".txt"
                 ref="fileUploader"
                 onChange={ e => this.handleFileA(e.target.files[0])}
-                ref={this.inputRef}
                 />
             </td>
             <td>

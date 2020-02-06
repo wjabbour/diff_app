@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Comparison from './Comparison';
 
-let reader;
-
 export default class ComparisonTable extends Component {
     constructor (props) {
         super(props);
@@ -13,16 +11,16 @@ export default class ComparisonTable extends Component {
             doCompare: false
         }
 
-        let conf = {
-            configurationName: "Will's Config",
-            fileType: "X12",
-            configurationRules: [
-                {
-                    segmentName: "GS",
-                    segmentNumber: 3
-                }
-            ]
-        }
+        // let conf = {
+        //     configurationName: "Will's Config",
+        //     fileType: "X12",
+        //     configurationRules: [
+        //         {
+        //             segmentName: "GS",
+        //             segmentNumber: 3
+        //         }
+        //     ]
+        // }
         //localStorage.setItem("configurationRules", JSON.stringify(conf));
         this.addComparison = this.addComparison.bind(this);
         this.doCompare = this.doCompare.bind(this);
