@@ -94,7 +94,7 @@ export default class Configuration extends Component {
                 { config.fileType }
             </option>
         );
-        let fileTypeSelect =    <select className="form-control" onChange={ this.onChangeFileType } >
+        let fileTypeSelect =    <select onChange={ this.onChangeFileType } >
                                     <option hidden defaultValue={{label: "", value: {}}}></option>
                                     { options }
                                 </select>       
@@ -104,7 +104,6 @@ export default class Configuration extends Component {
                     <div className="form-group">
                         <label>Configuration Name</label>
                         <input  type="text"
-                                className="form-control"
                                 value={this.state.configurationName}
                                 onChange={this.onChangeConfigurationName}
                         />
