@@ -12,16 +12,16 @@ export default class ComparisonTable extends Component {
             doCompare: false
         }
 
-        let conf = {
-            configurationName: "Will's Config",
-            fileType: "X12",
-            configurationRules: [
-                {
-                    segmentName: "GS",
-                    segmentNumber: 3
-                }
-            ]
-        }
+        // let conf = {
+        //     configurationName: "Will's Config",
+        //     fileType: "X12",
+        //     configurationRules: [
+        //         {
+        //             segmentName: "GS",
+        //             segmentNumber: 3
+        //         }
+        //     ]
+        // }
         //localStorage.setItem("configurationRules", JSON.stringify(conf));
 
         this.doCompare = this.doCompare.bind(this);
