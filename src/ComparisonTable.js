@@ -9,6 +9,7 @@ export default class ComparisonTable extends Component {
         
         this.state = {
             configurations: [],
+            comparisons: [],
             doCompare: false
         }
 
