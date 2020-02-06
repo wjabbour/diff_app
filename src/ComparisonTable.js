@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Comparison from './Comparison';
 
-let reader;
-
 export default class ComparisonTable extends Component {
     constructor (props) {
         super(props);
