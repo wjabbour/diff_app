@@ -95,9 +95,9 @@ export default class Configuration extends Component {
             </option>
         );
         let fileTypeSelect =    <select className="form-control" onChange={ this.onChangeFileType } >
-                            <option hidden defaultValue={{label: "", value: {}}}></option>
-                            { options }
-                        </select>       
+                                    <option hidden defaultValue={{label: "", value: {}}}></option>
+                                    { options }
+                                </select>       
         return (
             <div>
                 <form onSubmit={this.onSubmit}>

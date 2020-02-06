@@ -4,12 +4,12 @@ import Comparison from './Comparison';
 export default class ComparisonTable extends Component {
     constructor (props) {
         super(props);
-        
+        this.myRefs = [];
         this.state = {
             configurations: [],
-            comparisons: [],
-            doCompare: false
+            comparisons: []
         }
+        this.comparisonCounter = 0;
 
         // let conf = {
         //     configurationName: "Will's Config",
@@ -39,21 +39,28 @@ export default class ComparisonTable extends Component {
             configurations: configurations
         })
     }
-    addComparison() {
-        const newComparison = <Comparison   doCompare={ this.state.doCompare }
-                                            configurations={ this.state.configurations }
-                                            compareFiles={ this.compareFiles }/>
+    addComparison(e) {
+        e.preventDefault();
+        const comparisonList = this.state.comparisons;
         this.setState({
-            comparisons: this.state.comparisons.push(newComparison)
-        })
+            comparisons: comparisonList.concat(
+                <Comparison onRef={ref => (this.myRefs.push(ref))}
+                            configurations={ this.state.configurations }
+                            compareFiles={ this.compareFiles }
+                            key={ this.comparisonCounter.toString() } />
+            )
+        }, () => this.comparisonCounter++)
     }
     doCompare() {
-        this.setState({
-            doCompare: true
+        this.myRefs.forEach(someRef => {
+            someRef.runComparison();
         })
     }
-    compareFiles = (fileA, fileB, configuration) => {    
+    compareFiles = (fileA, fileB, configuration) => {  
         let comparison = "";
+        if (Object.keys(fileA).length === 0 || Object.keys(fileB).length === 0) {
+            return comparison;
+        } 
         for(let i = 0; i < fileA.lines.length; i++) {
             for(let j = 1; j < fileA.lines[i].length; j++) {
                 // if segment name is in conf
@@ -87,7 +94,16 @@ export default class ComparisonTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <Comparison doCompare={ this.state.doCompare } configurations={ this.state.configurations } compareFiles={ this.compareFiles }/>
+                    <Comparison onRef={ref => (this.myRefs.push(ref))} 
+                            doCompare={ this.state.doCompare }
+                            configurations={ this.state.configurations }
+                            compareFiles={ this.compareFiles }
+                            key={ this.comparisonCounter.toString() } />
+                    {
+                        this.state.comparisons.map(function(comparison, index) {
+                            return comparison; 
+                        })
+                    }
                     </tbody>
                 </table>
                 <div className="container">

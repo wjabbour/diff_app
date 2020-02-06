@@ -10,20 +10,20 @@ export default class Comparison extends Component {
             secondFile: {},
             configuration: {}
         }
-       
         this.handleFileA = this.handleFileA.bind(this);
         this.handleFileB = this.handleFileB.bind(this);
         this.handleSelectUpdate = this.handleSelectUpdate.bind(this);
     }
-
-    componentDidUpdate() {
-        console.log("Updating because my parents state was updated");
-        if (this.props.doCompare) {
-            let myResult = this.props.compareFiles(this.state.firstFile, this.state.secondFile, this.parseConfig(this.state.configuration));
-            console.log(myResult);
-        }
+    componentDidMount() {
+        this.props.onRef(this);
     }
-
+    componentWillUnmount() {
+        this.props.onRef(undefined);
+    }
+    runComparison() {
+        let myResult = this.props.compareFiles(this.state.firstFile, this.state.secondFile, this.parseConfig(this.state.configuration));
+        console.log(myResult);
+    }
     parseConfig() {
         const configuration = this.state.configuration;
         
@@ -114,32 +114,31 @@ export default class Comparison extends Component {
         // if (comparisonOutput) {
         // button = <button className="btn btn-primary" onClick={ e => this.downloadTxtFile() }>Download txt</button>
         return(
-          <tr> 
-            <td>
-                <input
-                name="File1"
-                type="file"
-                id="fileA"
-                accept=".txt"
-                ref="fileUploader"
-                onChange={ e => this.handleFileA(e.target.files[0])}
-                />
-            </td>
-            <td>
-                <input
-                name="File2"
-                type="file"
-                id="fileB"
-                accept=".txt"
-                ref="fileUploader"
-                onChange={ e => this.handleFileB(e.target.files[0])}
-                />
-            </td>
-            <td>
-                { configurationSelect }
-            </td>
+            <tr> 
+                <td>
+                    <input
+                    name="File1"
+                    type="file"
+                    id="fileA"
+                    accept=".txt"
+                    ref="fileUploader"
+                    onChange={ e => this.handleFileA(e.target.files[0])}
+                    />
+                </td>
+                <td>
+                    <input
+                    name="File2"
+                    type="file"
+                    id="fileB"
+                    accept=".txt"
+                    ref="fileUploader"
+                    onChange={ e => this.handleFileB(e.target.files[0])}
+                    />
+                </td>
+                <td>
+                    { configurationSelect }
+                </td>
             </tr> 
-            
         );
     }
 }

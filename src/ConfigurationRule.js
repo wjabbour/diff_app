@@ -46,9 +46,7 @@ export default class ConfigurationRule extends Component {
                     />
                     </div>
                     <div className="col-sm">
-                        <button onClick={this.onRemoveRuleInput}>
-                            -
-                        </button>
+                        <button onClick={this.onRemoveRuleInput}>-</button>
                     </div>
                 </div>
             </div>
