@@ -106,7 +106,7 @@ export default class Comparison extends Component {
     }
 
     render() {
-        let button;
+        //let button;
         let configurationSelect = this.createConfigurationSelect();
         // const comparisonOutput = this.state.comparisonOutput;
         // if (comparisonOutput) {
