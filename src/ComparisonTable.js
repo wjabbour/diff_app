@@ -25,8 +25,11 @@ export default class ComparisonTable extends Component {
         this.addComparison = this.addComparison.bind(this);
         this.doCompare = this.doCompare.bind(this);
     }
+    // TODO: Refactor to make manual call unecessary?
     componentDidMount() {
+        // sets state with config but happens async
         this.getConfigurations();
+        // so need to manually fetch config rules for our initial Comparison
         let configurations = [];
         if (localStorage.getItem("configurationRules")) {
             configurations.push(JSON.parse(localStorage.getItem("configurationRules")));
