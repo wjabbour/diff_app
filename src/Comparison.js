@@ -14,6 +14,7 @@ export default class Comparison extends Component {
         this.handleFileA = this.handleFileA.bind(this);
         this.handleFileB = this.handleFileB.bind(this);
         this.handleSelectUpdate = this.handleSelectUpdate.bind(this);
+        this.onRemoveComparison = this.onRemoveComparison.bind(this);
     }
     componentDidMount() {
         this.props.onRef(this);
@@ -107,6 +108,10 @@ export default class Comparison extends Component {
             </select>
         );
     }
+    onRemoveComparison(e) {
+        e.preventDefault();
+        this.props.removeComparison(e, this.props.listId);
+    }
     render() {
         let configurationSelect = this.createConfigurationSelect();
         let outcome = <div></div>;
@@ -124,7 +129,7 @@ export default class Comparison extends Component {
             if (!this.props.initial) {
                 outcome =   <div>
                                 <div>
-                                    <button>-</button>
+                                    <button onClick={ this.onRemoveComparison }>-</button>
                                 </div>  
                             </div>
             }

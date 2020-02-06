@@ -24,6 +24,7 @@ export default class ComparisonTable extends Component {
         //localStorage.setItem("configurationRules", JSON.stringify(conf));
         this.addComparison = this.addComparison.bind(this);
         this.doCompare = this.doCompare.bind(this);
+        this.removeComparison = this.removeComparison.bind(this);
     }
     // TODO: Refactor to make manual call unecessary?
     componentDidMount() {
@@ -34,7 +35,6 @@ export default class ComparisonTable extends Component {
         if (localStorage.getItem("configurationRules")) {
             configurations.push(JSON.parse(localStorage.getItem("configurationRules")));
         }
-        console.log(this.state.configurations);
         this.initialComparison = 
          <Comparison onRef={ref => (this.myRefs.push(ref))} 
                             doCompare={ this.state.doCompare }
@@ -64,13 +64,24 @@ export default class ComparisonTable extends Component {
                             configurations={ this.state.configurations }
                             compareFiles={ this.compareFiles }
                             initial={ false }
+                            removeComparison={ this.removeComparison }
+                            listId={ this.comparisonCounter.toString() }
                             key={ this.comparisonCounter.toString() } />
             )
         }, () => this.comparisonCounter++)
     }
+    removeComparison(e, id) {
+        e.preventDefault();
+        const comparisons = this.state.comparisons;
+        const newComparisons = comparisons.filter(comparison => comparison.key !== id);     
+        this.setState({ comparisons: newComparisons });
+    }
     doCompare() {
         this.myRefs.forEach(someRef => {
             someRef.runComparison();
+        })
+        this.setState({
+            doCompare: true
         })
     }
     compareFiles = (fileA, fileB, configuration) => {  
@@ -94,6 +105,13 @@ export default class ComparisonTable extends Component {
         return comparison;
     }
     render() {
+        let generateReportButton = <div></div>;
+
+        if (this.state.doCompare) {
+            generateReportButton =  <button>
+                                        Generate Report
+                                    </button>
+        }
         return (
             <div>
                 <h5>
@@ -128,6 +146,7 @@ export default class ComparisonTable extends Component {
                         <button onClick={this.addComparison}>
                                 Add Comparison
                         </button>
+                        { generateReportButton }
                     </div>
                 </div>
             </div>
