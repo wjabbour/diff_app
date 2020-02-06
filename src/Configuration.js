@@ -18,6 +18,18 @@ export default class Configuration extends Component {
         this.onRemoveRuleInput = this.onRemoveRuleInput.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+    componentDidMount() {
+        const inputList = this.state.ruleInputs;
+        this.setState({
+            ruleInputs: inputList.concat(
+                <ConfigurationRule  listid={this.counter.toString()}
+                                    onChangeRuleInput={this.onChangeRuleInput}
+                                    onRemoveRuleInput={this.onRemoveRuleInput} 
+                                    key={this.counter.toString()} 
+                />
+            )
+        }, () => { this.counter++; })
+    }
     onChangeConfigurationName(e) {
         this.setState({ configurationName: e.target.value });
     }
@@ -87,7 +99,28 @@ export default class Configuration extends Component {
             )
         }, () => { this.counter++; })
     }
+    createInitialTable() {
+    return  <div className="col">
+                <table className="table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Segment Name</th>
+                            <th scope="col">Segment Number</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        this.state.ruleInputs.map(function(input, index) {
+                            return input; 
+                        })
+                    }
+                    </tbody>
+                </table> 
+            </div>
+    }
     render() {
+        let initialTable = <div></div>;
         let fileTypes = [ { fileType: "X12" }, { fileType: "Delimeter" } ]; 
         const options = fileTypes.map((config) =>
             <option key={config.fileType} value={ config.fileType }>
@@ -95,10 +128,14 @@ export default class Configuration extends Component {
             </option>
         );
         let fileTypeSelect =    <select className="form-control"
-                                        onChange={ this.onChangeFileType }>
+                                        onChange={ this.onChangeFileType }
+                                        value={ this.state.fileType} >
                                             <option hidden defaultValue={{label: "", value: {}}}></option>
                                             { options }
                                 </select>       
+        if (this.state.fileType !== "" || this.state.configurationName !== "") {
+            initialTable = this.createInitialTable();
+        }
         return (
             <div>
                 <form>
@@ -121,11 +158,24 @@ export default class Configuration extends Component {
                         </div> 
                     </div>
                 </form>  
+                <div className="container">
+                    <div className="row">
+                        { initialTable }
+                        <div className="col">
+                            <div style={{marginTop: "50px"}} className="d-flex flex-row-reverse">
+                                <input type="submit" onClick={ this.onSubmit } value="Save" className="btn btn-primary" />
 
-                <table className="table-sm">
-                    <th scope="col">Segment Name</th>
-                    <th scope="col">Segment Number</th>
-                </table>    
+                                <button style={{marginRight: "50px"}} 
+                                        className="btn btn-primary"
+                                        onClick={this.onAddRuleInput}>
+                                            Add Configuration Rule
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                   
                     
                     {/* <div className="container">
                         <div className="row">
@@ -143,9 +193,7 @@ export default class Configuration extends Component {
                     </div> */}
                    
                 
-                <div style={{marginTop: "50px"}} className="d-flex flex-row-reverse">
-                    <input type="submit" onClick={ this.onSubmit } value="Save" className="btn btn-primary" />
-                </div>
+                
                 
             </div>
         )

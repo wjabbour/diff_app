@@ -31,25 +31,39 @@ export default class ConfigurationRule extends Component {
     }
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm">
-                        <input  type="text"
-                                className="form-control"
-                                onChange={this.onChangeSegmentName}
-                        />
-                    </div>
-                    <div className="col-sm">
+            <tr>
+                <td>
                     <input  type="text"
-                                className="form-control"
-                                onChange={this.onChangeIgnoreField}
+                        className="form-control"
+                        onChange={this.onChangeSegmentName}
                     />
-                    </div>
-                    <div className="col-sm">
-                        <button onClick={this.onRemoveRuleInput}>-</button>
-                    </div>
-                </div>
-            </div>
+                </td>
+                <td>
+                    <input  type="text"
+                        className="form-control"
+                        onChange={this.onChangeIgnoreField}
+                    />
+                </td>
+            </tr>
+            // <div className="container">
+            //     <div className="row">
+            //         <div className="col-sm">
+            //             <input  type="text"
+            //                     className="form-control"
+            //                     onChange={this.onChangeSegmentName}
+            //             />
+            //         </div>
+            //         <div className="col-sm">
+                    // <input  type="text"
+                    //             className="form-control"
+                    //             onChange={this.onChangeIgnoreField}
+                    // />
+            //         </div>
+            //         <div className="col-sm">
+            //             <button onClick={this.onRemoveRuleInput}>-</button>
+            //         </div>
+            //     </div>
+            // </div>
         );
     }
 }
