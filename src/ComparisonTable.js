@@ -24,7 +24,7 @@ export default class ComparisonTable extends Component {
             ]
         }
         //localStorage.setItem("configurationRules", JSON.stringify(conf));
-
+        this.addComparison = this.addComparison.bind(this);
         this.doCompare = this.doCompare.bind(this);
     }
     componentDidMount() {
@@ -40,6 +40,9 @@ export default class ComparisonTable extends Component {
         this.setState({
             configurations: configurations
         })
+    }
+    addComparison() {
+
     }
     doCompare() {
         this.setState({
@@ -89,7 +92,7 @@ export default class ComparisonTable extends Component {
                         <button onClick={this.doCompare}>
                                 Compare
                         </button>
-                        <button>
+                        <button onClick={this.addComparison}>
                                 Add Comparison
                         </button>
                     </div>
