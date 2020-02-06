@@ -9,7 +9,7 @@ export default class Comparison extends Component {
             firstFile: {},
             secondFile: {},
             configuration: {},
-            result: ""
+            result: null
         }
         this.handleFileA = this.handleFileA.bind(this);
         this.handleFileB = this.handleFileB.bind(this);
@@ -23,6 +23,7 @@ export default class Comparison extends Component {
     }
     runComparison() {
         let myResult = this.props.compareFiles(this.state.firstFile, this.state.secondFile, this.parseConfig(this.state.configuration));
+        console.log(myResult);
         this.setState({
             result: myResult
         })
@@ -89,8 +90,7 @@ export default class Comparison extends Component {
 
     downloadTxtFile = () => {
         const element = document.createElement("a");
-        this.setState({comparisonOutput: "A".bold()});
-        const file = new Blob([this.state.comparisonOutput], {type: 'text/html'});
+        const file = new Blob([this.state.result], {type: 'text/html'});
         element.href = URL.createObjectURL(file);
         element.download = "comparison_diff.txt";
         document.body.appendChild(element); // Required for this to work in FireFox
@@ -111,11 +111,22 @@ export default class Comparison extends Component {
     }
 
     render() {
-        //let button;
         let configurationSelect = this.createConfigurationSelect();
-        // const comparisonOutput = this.state.comparisonOutput;
-        // if (comparisonOutput) {
-        // button = <button className="btn btn-primary" onClick={ e => this.downloadTxtFile() }>Download txt</button>
+        let outcome;
+        if (typeof this.state.result === 'string') {
+            if (this.state.result.length !== 0) {
+                outcome =   <div className="d-flex align-items-center">
+                                <i className="material-icons mr-1">error_outline</i>
+                                <button className="btn btn-secondary mr-1">View</button>
+                                <button onClick={ e => this.downloadTxtFile() } className="btn btn-secondary">Save Report</button>
+                            </div>
+            } else {
+                outcome = <i className="material-icons mr-1">done</i>
+            }
+            
+        } else {
+             outcome = <div></div>//
+        }
         return(
             <tr> 
                 <td>
@@ -142,12 +153,7 @@ export default class Comparison extends Component {
                     { configurationSelect }
                 </td>
                 <td>
-                    <div className="d-flex align-items-center">
-                        <i className="material-icons mr-1">done</i>
-                        <button className="btn btn-secondary mr-1">View</button>
-                        <button className="btn btn-secondary">Save Report</button>
-                    </div>
-                    
+                    { outcome }
                 </td>
             </tr> 
         );
