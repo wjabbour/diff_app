@@ -88,7 +88,9 @@ export default class ComparisonTable extends Component {
                         <button onClick={this.doCompare}>
                                 Compare
                         </button>
-                    
+                        <button>
+                                Add Comparison
+                        </button>
                     </div>
                 </div>
             </div>
