@@ -40,6 +40,7 @@ export default class ComparisonTable extends Component {
                             doCompare={ this.state.doCompare }
                             configurations={ configurations }
                             compareFiles={ this.compareFiles }
+                            initial={ true }
                             key={ this.comparisonCounter.toString() } /> 
         this.comparisonCounter++;
     }
@@ -62,6 +63,7 @@ export default class ComparisonTable extends Component {
                 <Comparison onRef={ref => (this.myRefs.push(ref))}
                             configurations={ this.state.configurations }
                             compareFiles={ this.compareFiles }
+                            initial={ false }
                             key={ this.comparisonCounter.toString() } />
             )
         }, () => this.comparisonCounter++)

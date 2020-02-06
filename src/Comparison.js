@@ -109,7 +109,7 @@ export default class Comparison extends Component {
     }
     render() {
         let configurationSelect = this.createConfigurationSelect();
-        let outcome;
+        let outcome = <div></div>;
         if (typeof this.state.result === 'string') {
             if (this.state.result.length !== 0) {
                 outcome =   <div className="d-flex align-items-center">
@@ -121,7 +121,13 @@ export default class Comparison extends Component {
                 outcome = <i className="material-icons mr-1">done</i>
             }
         } else {
-             outcome = <div></div>
+            if (!this.props.initial) {
+                outcome =   <div>
+                                <div>
+                                    <button>-</button>
+                                </div>  
+                            </div>
+            }
         }
         return(
             <tr> 
