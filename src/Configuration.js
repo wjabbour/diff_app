@@ -94,39 +94,55 @@ export default class Configuration extends Component {
                 { config.fileType }
             </option>
         );
-        let fileTypeSelect =    <select onChange={ this.onChangeFileType } >
-                                    <option hidden defaultValue={{label: "", value: {}}}></option>
-                                    { options }
+        let fileTypeSelect =    <select className="form-control"
+                                        onChange={ this.onChangeFileType }>
+                                            <option hidden defaultValue={{label: "", value: {}}}></option>
+                                            { options }
                                 </select>       
         return (
             <div>
                 <form>
-                    <div className="form-group">
-                        <label>Configuration Name</label>
-                        <input  type="text"
-                                value={this.state.configurationName}
-                                onChange={this.onChangeConfigurationName}
-                        />
-                        <label>File Type</label>
-                        { fileTypeSelect }
-                        
+                    <div className="form-row text-center">
+                        <div className="form-group">
+                            <label>Configuration Name</label>
+                            <div className="col">
+                                <input  className="form-control"
+                                        type="text"
+                                        value={this.state.configurationName}
+                                        onChange={this.onChangeConfigurationName}
+                                />
+                            </div>
+                        </div>  
+                        <div className="form-group">
+                            <label>File Type</label>
+                            <div className="col">
+                                { fileTypeSelect }   
+                            </div>
+                        </div> 
+                    </div>
+                </form>  
 
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg">
-                                {
-                                    this.state.ruleInputs.map(function(input, index) {
-                                        return input; 
-                                    })
-                                }
-                                </div>
-                                <div className="col-sm">
-                                    <button onClick={this.onAddRuleInput}>+</button>
-                                </div>
+                <table className="table-sm">
+                    <th scope="col">Segment Name</th>
+                    <th scope="col">Segment Number</th>
+                </table>    
+                    
+                    {/* <div className="container">
+                        <div className="row">
+                            <div className="col-lg">
+                            {
+                                this.state.ruleInputs.map(function(input, index) {
+                                    return input; 
+                                })
+                            }
+                            </div>
+                            <div className="col-sm">
+                                <button onClick={this.onAddRuleInput}>+</button>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </div> */}
+                   
+                
                 <div style={{marginTop: "50px"}} className="d-flex flex-row-reverse">
                     <input type="submit" onClick={ this.onSubmit } value="Save" className="btn btn-primary" />
                 </div>
