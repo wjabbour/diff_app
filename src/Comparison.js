@@ -121,7 +121,6 @@ export default class Comparison extends Component {
                 accept=".txt"
                 ref="fileUploader"
                 onChange={ e => this.handleFileA(e.target.files[0])}
-                ref={this.inputRef}
                 />
             </td>
             <td>
