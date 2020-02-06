@@ -36,7 +36,6 @@ export default class ComparisonTable extends Component {
         if (localStorage.getItem("configurationRules")) {
             configurations.push(JSON.parse(localStorage.getItem("configurationRules")));
         }
-        console.log("After JSON.parse\n", configurations);
         this.setState({
             configurations: configurations
         })
@@ -85,13 +84,6 @@ export default class ComparisonTable extends Component {
                     </tbody>
                 </table>
                 <div className="container">
-                    {/* <div className="row">
-                        <div className="col-sm"></div>
-                        <div className="col-sm"></div>
-                        <div className="col-sm">
-                            
-                        </div>
-                    </div> */}
                     <div style={{marginTop: "50px"}} className="d-flex flex-row-reverse">
                         <button onClick={this.doCompare}>
                                 Compare
