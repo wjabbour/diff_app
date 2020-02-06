@@ -63,7 +63,6 @@ export default class Comparison extends Component {
         }
         reader.readAsText(file);
     }
-      
     handleFileB = file => {
         let fileContents = "";
         reader = new FileReader();
@@ -87,7 +86,6 @@ export default class Comparison extends Component {
             configuration: JSON.parse(e.target.value)
         })
     }
-
     downloadTxtFile = () => {
         const element = document.createElement("a");
         const file = new Blob([this.state.result], {type: 'text/html'});
@@ -109,7 +107,6 @@ export default class Comparison extends Component {
             </select>
         );
     }
-
     render() {
         let configurationSelect = this.createConfigurationSelect();
         let outcome;
@@ -123,7 +120,6 @@ export default class Comparison extends Component {
             } else {
                 outcome = <i className="material-icons mr-1">done</i>
             }
-            
         } else {
              outcome = <div></div>
         }
