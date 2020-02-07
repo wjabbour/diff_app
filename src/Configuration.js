@@ -19,16 +19,7 @@ export default class Configuration extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
-        const inputList = this.state.ruleInputs;
-        this.setState({
-            ruleInputs: inputList.concat(
-                <ConfigurationRule  listid={this.counter.toString()}
-                                    onChangeRuleInput={this.onChangeRuleInput}
-                                    onRemoveRuleInput={this.onRemoveRuleInput} 
-                                    key={this.counter.toString()} 
-                />
-            )
-        }, () => { this.counter++; })
+        this.createInitialInput();
     }
     onChangeConfigurationName(e) {
         this.setState({ configurationName: e.target.value });
@@ -56,9 +47,11 @@ export default class Configuration extends Component {
             ruleset.configurationRules.push(tempObj);
         });
         localStorage.setItem("configurationRules", JSON.stringify(ruleset));
-        this.setState({ ruleInputs: [], ruleValues: [], configurationName: "", fileType: "" })
+        this.setState({ ruleInputs: [], ruleValues: [], configurationName: "", fileType: "" },
+        () => this.createInitialInput());
     }
     onChangeRuleInput(segmentName, segmentNumber, id) {
+        console.log(segmentName, segmentNumber, id);
         const rules = this.state.ruleValues;
         let found = false;
         rules.forEach(rule => {
@@ -94,6 +87,20 @@ export default class Configuration extends Component {
                 <ConfigurationRule  listid={this.counter.toString()}
                                     onChangeRuleInput={this.onChangeRuleInput}
                                     onRemoveRuleInput={this.onRemoveRuleInput} 
+                                    initial={ false }
+                                    key={this.counter.toString()} 
+                />
+            )
+        }, () => { this.counter++; })
+    }
+    createInitialInput() {
+        const inputList = this.state.ruleInputs;
+        this.setState({
+            ruleInputs: inputList.concat(
+                <ConfigurationRule  listid={this.counter.toString()}
+                                    onChangeRuleInput={this.onChangeRuleInput}
+                                    onRemoveRuleInput={this.onRemoveRuleInput} 
+                                    initial={ true }
                                     key={this.counter.toString()} 
                 />
             )

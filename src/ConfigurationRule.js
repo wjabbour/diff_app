@@ -30,40 +30,31 @@ export default class ConfigurationRule extends Component {
         this.props.onRemoveRuleInput(e, this.props.listid);
     }
     render() {
+        let removeInputButton = <div></div>;
+
+        if (!this.props.initial) {
+            removeInputButton = <div className="col-sm">
+                                    <button onClick={this.onRemoveRuleInput}>-</button>
+                                </div>
+        } 
         return (
             <tr>
                 <td>
                     <input  type="text"
                         className="form-control"
-                        onChange={this.onChangeSegmentName}
+                        onChange={ this.onChangeSegmentName }
                     />
                 </td>
                 <td>
                     <input  type="text"
                         className="form-control"
-                        onChange={this.onChangeIgnoreField}
+                        onChange={ this.onChangeIgnoreField }
                     />
                 </td>
+                <td>
+                    { removeInputButton }
+                </td>
             </tr>
-            // <div className="container">
-            //     <div className="row">
-            //         <div className="col-sm">
-            //             <input  type="text"
-            //                     className="form-control"
-            //                     onChange={this.onChangeSegmentName}
-            //             />
-            //         </div>
-            //         <div className="col-sm">
-                    // <input  type="text"
-                    //             className="form-control"
-                    //             onChange={this.onChangeIgnoreField}
-                    // />
-            //         </div>
-            //         <div className="col-sm">
-            //             <button onClick={this.onRemoveRuleInput}>-</button>
-            //         </div>
-            //     </div>
-            // </div>
         );
     }
 }
