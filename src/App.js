@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+          <nav className="navbar navbar-expand-lg" style={{backgroundColor: "#4D148C"}}>
             <Link to="/" className="navbar-brand">FedEx</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
