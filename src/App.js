@@ -11,11 +11,13 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg" style={{backgroundColor: "#4D148C"}}>
-            <Link to="/" className="navbar-brand">FedEx</Link>
+            <Link to="/" className="navbar-brand">
+              <img src="./fedex_logo.png" width="100" height="35" alt=""/>
+            </Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/" className="nav-link" >Compare</Link>
+                  <Link to="/" className="nav-link">Compare</Link>
                 </li>
                 <li className="navbar-item">
                   <Link to="/configuration" className="nav-link">Configure</Link>
