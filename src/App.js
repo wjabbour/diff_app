@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Configuration from "./Configuration";
 import ComparisonTable from './ComparisonTable';
+import './index.css';
 
 class App extends Component {
   render() {
@@ -14,10 +15,10 @@ class App extends Component {
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/" className="nav-link" style={{color: "white"}}>Compare</Link>
+                  <Link to="/" className="nav-link" >Compare</Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/configuration" className="nav-link" style={{color: "white"}}>Configure</Link>
+                  <Link to="/configuration" className="nav-link">Configure</Link>
                 </li>
               </ul>
             </div>
