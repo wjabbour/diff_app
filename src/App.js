@@ -14,10 +14,10 @@ class App extends Component {
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/" className="nav-link">Compare</Link>
+                  <Link to="/" className="nav-link" style={{color: "white"}}>Compare</Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/configuration" className="nav-link">Configure</Link>
+                  <Link to="/configuration" className="nav-link" style={{color: "white"}}>Configure</Link>
                 </li>
               </ul>
             </div>
