@@ -4,11 +4,13 @@ import Comparison from './Comparison';
 export default class ComparisonTable extends Component {
     constructor (props) {
         super(props);
+        // this array holds references to each of the comparisons in our table
         this.myRefs = [];
         this.state = {
             configurations: [],
             comparisons: []
         }
+        // this counter is necessary to assign ids to our comparisons for react to update properly
         this.comparisonCounter = 0;
 
         this.addComparison = this.addComparison.bind(this);
@@ -66,6 +68,7 @@ export default class ComparisonTable extends Component {
         const newComparisons = comparisons.filter(comparison => comparison.key !== id);     
         this.setState({ comparisons: newComparisons });
     }
+    // calls the runComparison function on each comparison component, ie each row in our table
     doCompare() {
         this.myRefs.forEach(someRef => {
             someRef.runComparison();
