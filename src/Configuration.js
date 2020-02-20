@@ -180,27 +180,6 @@ export default class Configuration extends Component {
                         </div>
                     </div>
                 </div>
-                
-                   
-                    
-                    {/* <div className="container">
-                        <div className="row">
-                            <div className="col-lg">
-                            {
-                                this.state.ruleInputs.map(function(input, index) {
-                                    return input; 
-                                })
-                            }
-                            </div>
-                            <div className="col-sm">
-                                <button onClick={this.onAddRuleInput}>+</button>
-                            </div>
-                        </div>
-                    </div> */}
-                   
-                
-                
-                
             </div>
         )
     }

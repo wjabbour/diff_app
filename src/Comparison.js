@@ -46,6 +46,9 @@ export default class Comparison extends Component {
             return parsedConfig;
         }
     }
+    /*
+    TODO: We are splitting our files using * as the delimeter, but files may use other delimeters. 
+    */
     handleFileA = file => {
         let fileContents = "";
         reader = new FileReader();
