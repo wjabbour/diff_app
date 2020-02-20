@@ -51,7 +51,6 @@ export default class Configuration extends Component {
         () => this.createInitialInput());
     }
     onChangeRuleInput(segmentName, segmentNumber, id) {
-        console.log(segmentName, segmentNumber, id);
         const rules = this.state.ruleValues;
         let found = false;
         rules.forEach(rule => {
